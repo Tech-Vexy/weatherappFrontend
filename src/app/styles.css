@@ -1,0 +1,9 @@
+.humidity-bar {
+  width: 100%;
+}
+
+.humidity-progress {
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: rgb(75, 85, 99);
+}

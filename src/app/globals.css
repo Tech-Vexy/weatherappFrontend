@@ -3,6 +3,9 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --card-background: #ffffff;
+  --card-border: #e5e7eb;
+  --card-text: #171717;
 }
 
 @theme inline {
@@ -16,6 +19,37 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --card-background: #1f2937;
+    --card-border: #374151;
+    --card-text: #f3f4f6;
+  }
+  
+  .dark-light {
+    background-color: #1f2937;
+    color: #f3f4f6;
+  }
+  
+  .dark-light .card {
+    background-color: #111827;
+    border-color: #374151;
+  }
+  
+  input, button {
+    background-color: #111827;
+    border-color: #374151;
+    color: #f3f4f6;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .dark-light {
+    background-color: #ffffff;
+    color: #111827;
+  }
+  
+  .dark-light .card {
+    background-color: #ffffff;
+    border-color: #e5e7eb;
   }
 }
 
