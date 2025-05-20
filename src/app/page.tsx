@@ -79,8 +79,8 @@ const Home = () => {
       if (weatherData.city_info.lat && weatherData.city_info.lon) {
         setGeoLoading(true);
         try {
-          const { lat, lon } = weatherData.city_info;
-          const data = await WeatherService.getForecastByCoords(lat, lon, units as 'metric' | 'imperial');
+          const { latitude, longitude } = weatherData.city_info;
+          const data = await WeatherService.getForecastByCoords(latitude, longitude, units as 'metric' | 'imperial');
           setWeatherData(data);
         } catch (error) {
           console.error('Error refetching weather:', error);
