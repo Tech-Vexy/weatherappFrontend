@@ -10,7 +10,7 @@ const Home = () => {
   const [weatherData, setWeatherData] = useState<WeatherForecast | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [units, setUnits] = useState('metric');
+  const [units, setUnits] = useState<'metric' | 'imperial'>('metric');
   const [geoLoading, setGeoLoading] = useState(false);
 
   // Get first day forecast (current day)
@@ -40,7 +40,7 @@ const Home = () => {
       async (position) => {
         try {
           const { latitude, longitude } = position.coords;
-          const data = await WeatherService.getForecastByCoords(latitude, longitude, units as 'metric' | 'imperial');
+          const data = await WeatherService.getForecastByCoords(latitude, longitude, units);
           setWeatherData(data);
           if (data.city_info?.name) {
             setCity(data.city_info.name);
@@ -79,8 +79,12 @@ const Home = () => {
       if (weatherData.city_info.lat && weatherData.city_info.lon) {
         setGeoLoading(true);
         try {
-          const { latitude, longitude } = weatherData.city_info;
-          const data = await WeatherService.getForecastByCoords(lat, lon, units as 'metric' | 'imperial');
+          // FIXED: Use lat and lon from city_info directly
+          const data = await WeatherService.getForecastByCoords(
+            weatherData.city_info.lat, 
+            weatherData.city_info.lon, 
+            units
+          );
           setWeatherData(data);
         } catch (error) {
           console.error('Error refetching weather:', error);
@@ -93,7 +97,7 @@ const Home = () => {
       else if (city) {
         setLoading(true);
         try {
-          const data = await WeatherService.getForecastByCity(city, units as 'metric' | 'imperial');
+          const data = await WeatherService.getForecastByCity(city, units);
           setWeatherData(data);
         } catch (error) {
           console.error('Error refetching weather:', error);
@@ -106,7 +110,7 @@ const Home = () => {
       // If we don't have weather data but have a city, search by city
       setLoading(true);
       try {
-        const data = await WeatherService.getForecastByCity(city, units as 'metric' | 'imperial');
+        const data = await WeatherService.getForecastByCity(city, units);
         setWeatherData(data);
       } catch (error) {
         console.error('Error refetching weather:', error);
@@ -132,7 +136,7 @@ const Home = () => {
     setError(null);
     
     try {
-      const data = await WeatherService.getForecastByCity(city, units as 'metric' | 'imperial');
+      const data = await WeatherService.getForecastByCity(city, units);
       setWeatherData(data);
     } catch (error) {
       console.error('Error fetching weather data:', error);
