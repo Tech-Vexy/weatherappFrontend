@@ -181,11 +181,11 @@ export const WeatherService = {
       // First, get location information from Nominatim
       const locationInfo = await WeatherService.getLocationFromCoords(lat, lon);
       
-      // Then get weather data
+      // Then get weather data - FIXED: using lat/lon as latitude/longitude in params
       const response: AxiosResponse<WeatherForecast> = await weatherApi.get(`/api/weather/forecast/coordinates`, {
         params: {
-          latitude,
-          longitude,
+          latitude: lat,
+          longitude: lon,
           units
         }
       });
@@ -209,6 +209,5 @@ export const WeatherService = {
     }
   },
 };
-
 
 export default WeatherService;
