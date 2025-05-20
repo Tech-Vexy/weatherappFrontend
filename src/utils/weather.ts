@@ -107,7 +107,7 @@ interface NominatimResponse {
 
 // Create an axios instance with default configuration
 const weatherApi: AxiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://weatherbackend.fly.dev/',
   timeout: 20000, // Increased timeout to 20 seconds
   headers: {
     'Content-Type': 'application/json',
