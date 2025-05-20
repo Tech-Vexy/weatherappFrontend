@@ -107,7 +107,7 @@ interface NominatimResponse {
 
 // Create an axios instance with default configuration
 const weatherApi: AxiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://weatherbackend.fly.dev/',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://weatherbackend.fly.dev',
   timeout: 20000, // Increased timeout to 20 seconds
   headers: {
     'Content-Type': 'application/json',
@@ -184,8 +184,8 @@ export const WeatherService = {
       // Then get weather data
       const response: AxiosResponse<WeatherForecast> = await weatherApi.get(`/api/weather/forecast/coordinates`, {
         params: {
-          lat,
-          lon,
+          latitude,
+          longitude,
           units
         }
       });
